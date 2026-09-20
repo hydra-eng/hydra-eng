@@ -157,6 +157,139 @@ Thrives in both solo-operations and leading specialized teams.
 <br>
 
 <!-- ======================================================================= -->
+<!-- HARDWARE R&D BENCH                                                      -->
+<!-- ======================================================================= -->
+<h2>🛠️ <code>/root/hardware_lab/bench_inventory.cfg</code></h2>
+
+<p>The workbench behind every deployment log below — this is what actually gets a board from schematic to field-hardened hardware.</p>
+
+<table align="center" width="100%">
+  <tr>
+    <th>INSTRUMENT</th>
+    <th>SPEC CLASS</th>
+    <th>PRIMARY USE ON MY BUILDS</th>
+  </tr>
+  <tr>
+    <td>Digital Storage Oscilloscope</td>
+    <td>100 MHz, 4-channel</td>
+    <td>RF matching-network validation, LoRa Tx burst shape</td>
+  </tr>
+  <tr>
+    <td>Logic Analyzer</td>
+    <td>8-channel, 24 MHz</td>
+    <td>SPI / I2C / UART bring-up for SHT40, GPS, secure element</td>
+  </tr>
+  <tr>
+    <td>Bench Power Supply</td>
+    <td>0–30V / 0–5A dual output</td>
+    <td>µA-resolution deep-sleep current profiling</td>
+  </tr>
+  <tr>
+    <td>Hot-Air Rework Station</td>
+    <td>Adjustable 100–450°C</td>
+    <td>QFN rework, ATECC608A / MCU reflow touch-ups</td>
+  </tr>
+  <tr>
+    <td>Reflow Hot Plate</td>
+    <td>PID-controlled ramp/soak/spike</td>
+    <td>2-layer board assembly, fine-pitch component placement</td>
+  </tr>
+  <tr>
+    <td>FDM 3D Printer</td>
+    <td>0.1 mm layer height</td>
+    <td>IP67 enclosure iterations, gasket fit-testing</td>
+  </tr>
+</table>
+
+<br>
+
+<h3>🧱 PCB Layer Stackup — CryoSentinel Mainboard</h3>
+
+<pre>
+PCB LAYER STACKUP :: 2-LAYER, 1.6mm FR4, 1oz COPPER
+====================================================================
+   ┌──────────────────────────────────────────────────────────┐
+   │  L1 — TOP COPPER    RF feed + signal traces + pads        │
+   ├──────────────────────────────────────────────────────────┤
+   │        FR4 CORE  (1.6mm, εr ≈ 4.5)  — substrate            │
+   ├──────────────────────────────────────────────────────────┤
+   │  L2 — BOTTOM COPPER  solid GND pour + RF return path       │
+   └──────────────────────────────────────────────────────────┘
+
+   Trace impedance target ......... 50Ω single-ended (LoRa RF line)
+   Coplanar waveguide gap .......... tuned per εr for 865 MHz match
+   Via style ....................... 0.3mm drill / 0.6mm pad, tented
+   Copper pour clearance ........... 0.3mm from RF trace edge
+</pre>
+
+<br>
+<hr>
+<br>
+
+<!-- ======================================================================= -->
+<!-- SYSTEM TOPOLOGY / SCHEMATIC DIAGRAMS                                    -->
+<!-- ======================================================================= -->
+<h2>🧭 <code>/root/schematics/system_topology.mmd</code></h2>
+
+<p>Signal-chain and system-level diagrams for the three deployments below — how the sensors, secure element, radio, and software stack actually talk to each other.</p>
+
+<h3>🧊 CryoSentinel — Sensor-to-Cloud Signal Chain</h3>
+
+```mermaid
+flowchart LR
+    A[SHT40 Temp/RH Sensor] --> M[ESP32-C3 MCU]
+    B[3-axis ±16g Accelerometer] --> M
+    C[u-blox MAXM10S GPS] --> M
+    M -->|SHA-256 hash-chained frame| S[ATECC608A Secure Element]
+    S -->|ECDSA P-256 signature| L[LoRa SX1262 Radio]
+    L -->|865 MHz, up to 15 km| G[LoRa Gateway]
+    G --> F[FastAPI + WebSocket Backend]
+    F --> D[Live Breach-Telemetry Dashboard]
+    N[NFC ST25DV Tag] -. RF-harvested read-back .-> M
+```
+
+<h3>🎙️ Project VENUS — Voice-to-Action Pipeline</h3>
+
+```mermaid
+sequenceDiagram
+    participant U as User (Voice)
+    participant E as ESP32 Smart Speaker
+    participant B as Python WebSocket Bridge
+    participant D as DeepSeek LLM (Ollama, local)
+    participant W as Windows Automation
+    participant H as Home Assistant
+    U->>E: Wake word + spoken command
+    E->>B: Streamed audio / parsed intent
+    B->>D: Prompt + runtime-injected IoT tool schema
+    D-->>B: Tool-call decision
+    par Dual-domain routing
+        B->>W: OS-level command (e.g. open app)
+        B->>H: Smart-home command (e.g. toggle light)
+    end
+    W-->>U: Action confirmed, no cloud round-trip
+    H-->>U: Action confirmed, no cloud round-trip
+```
+
+<h3>🔋 DES-TWIN — Simulation & Visualization Architecture</h3>
+
+```mermaid
+flowchart TB
+    P[Non-homogeneous Poisson Demand Generator] --> K[SimPy Discrete-Event Kernel]
+    C[Physics-based CC-CV Li-ion Charging Model] --> K
+    K --> API[FastAPI Orchestration Layer]
+    API --> R[React + Vite Frontend]
+    R --> V[deck.gl WebGL 3D Geospatial Map]
+    API --> KPI[KPI Engine]
+    KPI --> W["Wait Time (avg / p95)"]
+    KPI --> LR[Lost-Swap Revenue]
+    KPI --> CU[Charger Utilization]
+```
+
+<br>
+<hr>
+<br>
+
+<!-- ======================================================================= -->
 <!-- MISSION CRITICAL DEPLOYMENTS (PROJECTS)                                 -->
 <!-- ======================================================================= -->
 <h2>🚀 <code>/root/deployments/mission_critical_logs.sh</code></h2>
@@ -207,6 +340,127 @@ Thrives in both solo-operations and leading specialized teams.
     </tr>
   </table>
 </details>
+
+<br>
+<hr>
+<br>
+
+<!-- ======================================================================= -->
+<!-- CAD / ENCLOSURE DESIGN GALLERY                                          -->
+<!-- ======================================================================= -->
+<h2>🧩 <code>/root/cad_lab/enclosure_models.step</code></h2>
+
+<p>The mechanical half of CryoSentinel — modeled alongside the PCB in KiCad's 3D viewer, then finished in STEP/VRML to check tolerances against off-the-shelf gaskets and glands before the first print.</p>
+
+<pre>
+EXPLODED ASSEMBLY :: CRYOSENTINEL FIELD ENCLOSURE
+=======================================================
+        ┌────────────────┐   TOP SHELL
+        │  PETG-CF, 3mm  │   printed vertically for
+        │  wall thickness│   max layer-adhesion strength
+        └───────┬────────┘
+                │  M3 heat-set brass inserts x4
+        ┌───────▼────────┐
+        │  IP67 GASKET   │   2mm silicone cord,
+        │                │   compressed ~20% on close
+        └───────┬────────┘
+        ┌───────▼────────┐
+        │   MAINBOARD    │   2-layer FR4 + secure element
+        │  + SE + GPS    │   RF window cut-out for antenna
+        └───────┬────────┘
+        ┌───────▼────────┐
+        │  LiPo 1000mAh  │   cell bay w/ thermal pad,
+        │                │   strain-relieved leads
+        └───────┬────────┘
+        ┌───────▼────────┐
+        │  BASE SHELL    │   PETG-CF, cable gland ports,
+        │                │   mounting boss for field bracket
+        └────────────────┘
+</pre>
+
+<table align="center" width="100%">
+  <tr>
+    <th>COMPONENT</th>
+    <th>MATERIAL</th>
+    <th>DESIGN NOTE</th>
+  </tr>
+  <tr>
+    <td>Top / Base Shell</td>
+    <td>PETG-CF (carbon-filled)</td>
+    <td>UV-stable, chosen over PLA for outdoor cold-chain duty</td>
+  </tr>
+  <tr>
+    <td>Sealing Gasket</td>
+    <td>Silicone, 2mm cord stock</td>
+    <td>Compression-fit groove sized to hit IP67</td>
+  </tr>
+  <tr>
+    <td>RF Window</td>
+    <td>Open cut-out, zero metal</td>
+    <td>Keeps LoRa + GPS antenna path unshielded</td>
+  </tr>
+  <tr>
+    <td>Fasteners</td>
+    <td>M3 brass heat-set inserts</td>
+    <td>Survives repeated field servicing without stripping</td>
+  </tr>
+  <tr>
+    <td>Cable Entry</td>
+    <td>IP68-rated gland</td>
+    <td>Used only on debug/charge variants, sealed on field units</td>
+  </tr>
+</table>
+
+<br>
+<hr>
+<br>
+
+<!-- ======================================================================= -->
+<!-- RF & POWER ENGINEERING DEEP DIVE                                        -->
+<!-- ======================================================================= -->
+<h2>📡 <code>/root/rf_lab/link_and_power_budget.calc</code></h2>
+
+<h3>LoRa SX1262 Link Budget (865 MHz, IN865 ISM band)</h3>
+
+<table align="center" width="100%">
+  <tr><th>PARAMETER</th><th>VALUE</th></tr>
+  <tr><td>Tx Output Power</td><td>+22 dBm</td></tr>
+  <tr><td>Rx Sensitivity (SF12 / BW125)</td><td>−137 dBm</td></tr>
+  <tr><td>Tx / Rx Antenna Gain</td><td>2 dBi / 2 dBi</td></tr>
+  <tr><td>Estimated Free-Space Path Loss @ 15 km</td><td>~155 dB</td></tr>
+  <tr><td>Resulting Link Margin</td><td>~6 dB</td></tr>
+  <tr><td>Coding Rate</td><td>4/5</td></tr>
+</table>
+
+<br>
+
+<h3>Power Budget — 1000 mAh LiPo, 36-Day Field Target</h3>
+
+<table align="center" width="100%">
+  <tr><th>MODE</th><th>CURRENT DRAW</th><th>DUTY CYCLE</th></tr>
+  <tr><td>Deep Sleep (MCU + peripherals off)</td><td>&lt; 1 µA</td><td>~99.7% of runtime</td></tr>
+  <tr><td>Sensor Wake + Log</td><td>~8 mA</td><td>Periodic, every 60s</td></tr>
+  <tr><td>LoRa Tx Burst</td><td>~120 mA</td><td>Once per uplink interval</td></tr>
+  <tr><td>GPS Warm-Start Fix</td><td>~25 mA</td><td>On tamper / geofence trigger only</td></tr>
+  <tr><td>NFC RF-Harvested Read-Back</td><td>0 mA (battery)</td><td>Powered entirely by reader field</td></tr>
+</table>
+
+<pre>
+DEEP-SLEEP CURRENT PROFILE (LOGIC ANALYZER + BENCH SUPPLY CAPTURE)
+====================================================================
+ mA
+120 ┤                     ▄▄                                    
+100 ┤                     ██                                    
+ 80 ┤                     ██                                    
+ 60 ┤                     ██                                    
+ 40 ┤                     ██                                    
+ 20 ┤                 ▄   ██   ▄                                
+  8 ┤            ▄▄▄▄██   ██▄▄▄██▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
+<1µA┼▄▄▄▄▄▄▄▄▄▄▄▄▄░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+    └────────────────────────────────────────────────────────────
+      sleep      sensor  LoRa   GPS         sleep (resumes ~36d)
+                  wake    tx    fix
+</pre>
 
 <br>
 <hr>
@@ -273,6 +527,25 @@ Thrives in both solo-operations and leading specialized teams.
     <td>🏅 Finalist</td>
     <td>General Tech Solutions</td>
   </tr>
+</table>
+
+<br>
+<hr>
+<br>
+
+<!-- ======================================================================= -->
+<!-- CURRENTLY PROTOTYPING / ROADMAP                                         -->
+<!-- ======================================================================= -->
+<h2>🧪 <code>/root/wip/currently_prototyping.todo</code></h2>
+
+<table align="center" width="100%">
+  <tr><th>STATUS</th><th>BUILD</th></tr>
+  <tr><td>🟢 Active</td><td>Batch ATECC608A provisioning fixture for secure-element key injection</td></tr>
+  <tr><td>🟡 Bring-up</td><td>4-layer revision of the CryoSentinel board with a dedicated impedance-controlled RF layer</td></tr>
+  <tr><td>🟡 Bring-up</td><td>Solar + supercapacitor front-end to remove the LiPo dependency for permanent installs</td></tr>
+  <tr><td>🔵 Research</td><td>On-device TinyML anomaly detection running on the accelerometer stream</td></tr>
+  <tr><td>🔵 Research</td><td>UWB ranging module for shelf-level indoor cold-storage localization</td></tr>
+  <tr><td>🔵 Research</td><td>Swapping the NFC read-back path to an energy-harvesting RF front-end with higher range</td></tr>
 </table>
 
 <br>
