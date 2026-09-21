@@ -2,13 +2,12 @@
 <!-- BOOT SEQUENCE & HEADER                                                  -->
 <!-- ======================================================================= -->
 <div align="center">
-  <!-- Fixed font size to 45 so it fits perfectly on all screens -->
   <img src="https://capsule-render.vercel.app/api?type=rect&color=0d1117&height=250&section=header&text=AKSHITH%20JAKKARAJU&fontSize=45&fontColor=00FF41&animation=twinkling&desc=HARDWARE%20HACKER%20%7C%20IoT%20SECURITY%20%7C%20FULL-STACK&descAlignY=70&descAlign=50" width="100%"/>
 </div>
 
 <div align="center">
   <a href="https://git.io/typing-svg">
-    <img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&weight=600&size=20&pause=1000&color=00FF41&background=0d1117&center=true&vCenter=true&width=800&height=50&lines=>_BYPASSING_MAINFRAME_SECURITY...;>_FLASHING_CUSTOM_FIRMWARE_TO_ESP32...;>_ESTABLISHING_SECURE_LORA_UPLINK...;>_SYSTEM_ONLINE._WELCOME." alt="Terminal Boot" />
+    <img src="https://readme-typing-svg.demolab.com/?font=Fira+Code&weight=600&size=20&pause=1000&color=00FF41&background=0d1117&center=true&vCenter=true&width=800&height=50&lines=>_BYPASSING_MAINFRAME_SECURITY...;>_FLASHING_CUSTOM_FIRMWARE_TO_ESP32...;>_ESTABLISHING_SECURE_LORA_UPLINK...;>_SYSTEM_ONLINE._WELCOME." alt="Terminal Boot" />
   </a>
 </div>
 
@@ -21,24 +20,14 @@
 </div>
 
 <br>
-
-<div align="center">
-  <img src="https://api.visitorbadge.io/api/visitors?path=hydra-eng.hydra-eng&countColor=%2300FF41&labelColor=%23000000&style=for-the-badge&label=NETWORK_INTRUDERS" alt="Visitors"/>
-</div>
-
-<br>
 <hr>
 <br>
 
 <!-- ======================================================================= -->
-<!-- VISUAL HARDWARE LAB & SCHEMATICS                                        -->
+<!-- HERO CIRCUIT BANNER — self-hosted, replaces the broken Pinterest gif    -->
 <!-- ======================================================================= -->
-<h2 align="center">🔬 <code>/sys/hardware_lab/live_feed.sh</code></h2>
-
 <div align="center">
-  <p><i>Live telemetry and hardware visualization node.</i></p>
-  <!-- Animated PCB / Hardware GIF to replace the ASCII -->
-  <img src="https://i.pinimg.com/originals/e5/22/d9/e522d9921b79f8c6ebc4d9bcbf3c9902.gif" width="80%" style="border: 2px solid #00FF41; border-radius: 10px;" alt="Hardware PCB Render"/>
+  <img src="assets/circuit_banner.svg" width="90%" alt="CryoSentinel schematic banner"/>
 </div>
 
 <br>
@@ -63,9 +52,9 @@ STATUS        : Seeking high-impact roles in Embedded AI & IoT Security
 ================================================================================
 
 [+] PROFILE LOADED:
-I operate at the bleeding edge of cyber-physical systems. I do not just write 
-code; I build the physical hardware it runs on. From custom 2-layer PCB design, 
-power budgeting, and RF/wireless protocols to secure-element cryptography, 
+I operate at the bleeding edge of cyber-physical systems. I do not just write
+code; I build the physical hardware it runs on. From custom 2-layer PCB design,
+power budgeting, and RF/wireless protocols to secure-element cryptography,
 Python backends, and React dashboards, I control the entire tech stack.
 
 [+] COMBAT RECORD:
@@ -75,6 +64,20 @@ Thrives in both solo-operations and leading specialized teams.
     </td>
   </tr>
 </table>
+
+<br>
+<hr>
+<br>
+
+<!-- ======================================================================= -->
+<!-- AKSHITH-IC — the signature, unique piece                                -->
+<!-- ======================================================================= -->
+<h2 align="center">🧷 <code>/root/hardware_lab/pinout.diagram</code></h2>
+<p align="center"><i>If I were a chip, this is my datasheet.</i></p>
+
+<div align="center">
+  <img src="assets/pinout.svg" width="80%" alt="AKSHITH-IC pinout diagram"/>
+</div>
 
 <br>
 <hr>
@@ -352,6 +355,8 @@ flowchart TB
 
 <p>The mechanical half of CryoSentinel — modeled alongside the PCB in KiCad's 3D viewer, then finished in STEP/VRML to check tolerances against off-the-shelf gaskets and glands before the first print.</p>
 
+<p>📦 <a href="cad/cryosentinel_enclosure.stl"><b>cryosentinel_enclosure.stl</b></a> — open this file on GitHub and it renders in GitHub's own interactive 3D viewer (drag to orbit, scroll to zoom) — no external tool needed. This is a simplified stand-in for the real CAD model: chamfered base shell, lid, and the antenna-window boss on the RF face.</p>
+
 <pre>
 EXPLODED ASSEMBLY :: CRYOSENTINEL FIELD ENCLOSURE
 =======================================================
@@ -449,12 +454,12 @@ EXPLODED ASSEMBLY :: CRYOSENTINEL FIELD ENCLOSURE
 DEEP-SLEEP CURRENT PROFILE (LOGIC ANALYZER + BENCH SUPPLY CAPTURE)
 ====================================================================
  mA
-120 ┤                     ▄▄                                    
-100 ┤                     ██                                    
- 80 ┤                     ██                                    
- 60 ┤                     ██                                    
- 40 ┤                     ██                                    
- 20 ┤                 ▄   ██   ▄                                
+120 ┤                     ▄▄
+100 ┤                     ██
+ 80 ┤                     ██
+ 60 ┤                     ██
+ 40 ┤                     ██
+ 20 ┤                 ▄   ██   ▄
   8 ┤            ▄▄▄▄██   ██▄▄▄██▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
 <1µA┼▄▄▄▄▄▄▄▄▄▄▄▄▄░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
     └────────────────────────────────────────────────────────────
@@ -467,9 +472,15 @@ DEEP-SLEEP CURRENT PROFILE (LOGIC ANALYZER + BENCH SUPPLY CAPTURE)
 <br>
 
 <!-- ======================================================================= -->
-<!-- HACKATHON GLORY & ACHIEVEMENTS                                          -->
+<!-- HACKATHON GLORY & ACHIEVEMENTS — self-hosted trophy shelf               -->
 <!-- ======================================================================= -->
 <h2>🏆 <code>/root/sys_logs/hackathon_victories.log</code></h2>
+
+<div align="center">
+  <img src="assets/trophy_shelf.svg" width="95%" alt="Hackathon trophy shelf"/>
+</div>
+
+<br>
 
 <blockquote>
   <b>[ CRITICAL HIT ] 🥇 1st Place — National Cyber Resilience BFSI Hackathon 2026</b><br>
@@ -480,54 +491,6 @@ DEEP-SLEEP CURRENT PROFILE (LOGIC ANALYZER + BENCH SUPPLY CAPTURE)
   <b>[ CRITICAL HIT ] 🥇 1st Place — Prakasam Police 'Mission Youth' Hackathon 2026</b><br>
   Won 1st place as part of Team Hydra in a highly competitive national-level hackathon organized under the Prakasam Police Mission Youth initiative.
 </blockquote>
-
-<table align="center" width="100%">
-  <tr>
-    <th>SYSTEM DESIGNATION (EVENT)</th>
-    <th>CLEARANCE LEVEL (STATUS)</th>
-    <th>DOMAIN FOCUS</th>
-  </tr>
-  <tr>
-    <td>Rabbit AI Hackathon</td>
-    <td>🏅 Finalist</td>
-    <td>AI / LLM Implementation</td>
-  </tr>
-  <tr>
-    <td>HackQuanta</td>
-    <td>🏅 Top 8</td>
-    <td>UI/UX & Systems Design</td>
-  </tr>
-  <tr>
-    <td>Andhra AI Police Hackathon</td>
-    <td>🏅 Finalist</td>
-    <td>AI in Law Enforcement</td>
-  </tr>
-  <tr>
-    <td>Brainwave 2.0, DTU</td>
-    <td>🥉 Top 3</td>
-    <td>Hardware Innovation</td>
-  </tr>
-  <tr>
-    <td>HackSmart by BatterySmart</td>
-    <td>🏅 Top 7</td>
-    <td>EV / Battery Tech</td>
-  </tr>
-  <tr>
-    <td>IIT Kharagpur Data Science</td>
-    <td>🎖️ National Participant</td>
-    <td>Data Analytics / Models</td>
-  </tr>
-  <tr>
-    <td>Riverthon, Amity</td>
-    <td>🏅 Finalist</td>
-    <td>General Tech Solutions</td>
-  </tr>
-  <tr>
-    <td>Hack KRMU</td>
-    <td>🏅 Finalist</td>
-    <td>General Tech Solutions</td>
-  </tr>
-</table>
 
 <br>
 <hr>
@@ -553,7 +516,7 @@ DEEP-SLEEP CURRENT PROFILE (LOGIC ANALYZER + BENCH SUPPLY CAPTURE)
 <br>
 
 <!-- ======================================================================= -->
-<!-- GITHUB TELEMETRY & ANALYTICS                                            -->
+<!-- GITHUB TELEMETRY & ANALYTICS — fixed domains only                       -->
 <!-- ======================================================================= -->
 <h2>📊 <code>/root/sys_telemetry/fetch_github_stats.sh</code></h2>
 
@@ -565,21 +528,14 @@ DEEP-SLEEP CURRENT PROFILE (LOGIC ANALYZER + BENCH SUPPLY CAPTURE)
 <br>
 
 <div align="center">
-  <img src="https://github-readme-streak-stats.herokuapp.com/?user=hydra-eng&theme=tokyonight&hide_border=true&ring=00FF41&fire=00FF41&currStreakNum=00FF41" width="98%" />
+  <img src="https://streak-stats.demolab.com/?user=hydra-eng&theme=tokyonight&hide_border=true&ring=00FF41&fire=00FF41&currStreakNum=00FF41" width="98%" />
 </div>
 
 <br>
 
+<!-- Contribution snake — activates automatically after the workflow below runs once -->
 <div align="center">
-  <img src="https://github-profile-trophy.vercel.app/?username=hydra-eng&theme=tokyonight&no-frame=true&no-bg=true&margin-w=15&column=7" alt="Trophies" width="98%" />
-</div>
-
-<br>
-
-<div align="center">
-  <a href="https://github.com/vn7n24fzkq/github-profile-summary-cards">
-    <img src="https://github-profile-summary-cards.vercel.app/api/cards/profile-details?username=hydra-eng&theme=tokyonight" width="98%" />
-  </a>
+  <img src="https://raw.githubusercontent.com/hydra-eng/hydra-eng/output/github-contribution-grid-snake-dark.svg" width="98%" alt="Contribution snake animation"/>
 </div>
 
 <br>
@@ -590,5 +546,5 @@ DEEP-SLEEP CURRENT PROFILE (LOGIC ANALYZER + BENCH SUPPLY CAPTURE)
 <!-- TERMINAL CLOSEOUT                                                       -->
 <!-- ======================================================================= -->
 <div align="center">
-  <img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&weight=600&size=18&pause=1000&color=00FF41&background=0d1117&center=true&vCenter=true&width=800&height=40&lines=>_LOGGING_OUT_SESSION...;>_WIPING_LOGS...;>_CONNECTION_TERMINATED_SUCCESSFULLY." alt="Terminal Out SVG" />
+  <img src="https://readme-typing-svg.demolab.com/?font=Fira+Code&weight=600&size=18&pause=1000&color=00FF41&background=0d1117&center=true&vCenter=true&width=800&height=40&lines=>_LOGGING_OUT_SESSION...;>_WIPING_LOGS...;>_CONNECTION_TERMINATED_SUCCESSFULLY." alt="Terminal Out SVG" />
 </div>
